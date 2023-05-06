@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>905660033288-usncm6j8mivrli3rg2e7i4lkaot0pmbf.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.905660033288-usncm6j8mivrli3rg2e7i4lkaot0pmbf</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCkFbaiYnhEXiEAHBi0xa8Pugv4TpOI8xI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>905660033288</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.furnitureApp</string>
+	<key>PROJECT_ID</key>
+	<string>furniture-app-6fd25</string>
+	<key>STORAGE_BUCKET</key>
+	<string>furniture-app-6fd25.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:905660033288:ios:ccbf8e0208c925313ba4bd</string>
+</dict>
+</plist>
