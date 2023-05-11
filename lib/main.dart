@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import './homeScreen.dart';
+import './widgets/utils.dart';
+import './start_screen.dart';
 
 Future< void> main() async {
   try{
@@ -19,13 +20,15 @@ class MyApp extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    scaffoldMessengerKey : messengerKey;
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
        
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(),
+      // home: HomeScreen(),
+      home: StartScreen(),
     );
   }
 }

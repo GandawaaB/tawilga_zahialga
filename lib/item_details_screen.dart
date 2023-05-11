@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:furniture_app/virtual_ar_view_screen.dart";
-import "./items.dart";
+import 'model/items.dart';
 
 class ItemDetailsScreen extends StatefulWidget {
   Items? clickItemInfo;

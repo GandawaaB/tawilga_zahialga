@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:furniture_app/item_details_screen.dart';
-import "./items.dart";
+import 'model/items.dart';
 
 class ItemUIDesignWidget extends StatefulWidget {
   Items? itemsInfo;

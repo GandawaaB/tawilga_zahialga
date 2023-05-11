@@ -14,6 +14,7 @@ class ItemsUploadScreen extends StatefulWidget {
   
   @override
   State<ItemsUploadScreen> createState() => _ItemsUploadScreenState();
+  
 }
 
 class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
@@ -212,7 +213,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
           itemDescriptionEditController.text.isNotEmpty &&
           itemPriceEditController.text.isNotEmpty) {
         setState(() {
-          isUploading = true;
+          isUploading = true; 
         });
 
         //1. image upload to cload storage

@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/Item_ui_design_widget.dart';
+import 'package:furniture_app/login_screen.dart';
 import './Items_upload_screen.dart';
-import 'items.dart';
-
+import 'model/items.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +14,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
+  final user = FirebaseAuth.instance.currentUser!;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,6 +64,22 @@ class _HomeScreenState extends State<HomeScreen> {
           if (dataSnapshot.hasData) {
             return Column(
               children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 0, horizontal: 9),
+                  child: Row(
+                    children: [
+                      Text(user.email!),
+                      TextButton(
+                        onPressed: () => logOut(),
+                        child: const Text(
+                          "гарах",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 const Card(
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
@@ -93,12 +113,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 30,
                     ),
                   ),
-                )
+                ),
               ],
             );
           }
         },
       ),
     );
+  }
+
+  logOut() {
+    FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: ((context) => Loginscreen())));
   }
 }
