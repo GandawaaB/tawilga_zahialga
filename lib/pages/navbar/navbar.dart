@@ -67,11 +67,11 @@ class _NavigationScreenState extends State<NavigationScreen>
             appBar: AppBar(
               leading: IconButton(
                 color: Colors.black,
-                icon: const Icon(Icons.menu),
+                icon: const Icon(Icons.chair_alt_sharp,color: Color.fromARGB(255, 53, 59, 78),),
                 tooltip: 'Show Snackbar',
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('This is a snackbar')));
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(content: Text('This is a snackbar')));
                 },
               ),
               backgroundColor: Colors.white,
@@ -86,8 +86,9 @@ class _NavigationScreenState extends State<NavigationScreen>
               ),
               actions: [
                 IconButton(
-                  onPressed: () {
+                    onPressed: () {
                     Navigator.push(
+
                       context,
                       MaterialPageRoute(
                           builder: (c) => const ItemsUploadScreen()),

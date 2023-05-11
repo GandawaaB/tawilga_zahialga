@@ -107,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisCount: 2,
                         mainAxisSpacing: 5,
                         crossAxisSpacing: 5,
-                        childAspectRatio: 0.73,
+                        childAspectRatio: 0.8,
                       ),
                       itemCount: dataSnapshot.data!.docs.length,
                       itemBuilder: (context, index) {

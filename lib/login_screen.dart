@@ -1,17 +1,17 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 import 'dart:math';
-import 'dart:developer';
+// import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:furniture_app/forgot_password.dart';
-import 'package:furniture_app/homeScreen.dart';
+// import 'package:furniture_app/homeScreen.dart';
 import 'package:furniture_app/pages/navbar/navbar.dart';
 import 'package:furniture_app/sign_up.dart';
-import 'package:furniture_app/widgets/utils.dart';
+// import 'package:furniture_app/widgets/utils.dart';
 import './widgets/getTextFromField.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({Key? key}) : super(key: key);
@@ -51,8 +51,8 @@ class _LoginscreenState extends State<Loginscreen> {
   }
 
   Widget loginScreen() {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

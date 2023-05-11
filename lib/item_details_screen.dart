@@ -1,5 +1,10 @@
+// ignore_for_file: must_be_immutable
+
+import "package:cloud_firestore/cloud_firestore.dart";
+import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
 import "package:furniture_app/virtual_ar_view_screen.dart";
+// import "package:http/http.dart";
 import 'model/items.dart';
 
 class ItemDetailsScreen extends StatefulWidget {
@@ -11,6 +16,32 @@ class ItemDetailsScreen extends StatefulWidget {
 }
 
 class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
+  Future addFavorite() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    CollectionReference _collectoinRef =
+        FirebaseFirestore.instance.collection("users-favorite-items");
+
+    return _collectoinRef.doc(user!.email).collection('items').doc().set({
+      'itemName': widget.clickItemInfo!.itemName,
+    }).then((value) => print("success added favorite product "));
+  }
+
+  Future deleteFavotite() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    CollectionReference _collectoinRef =
+        FirebaseFirestore.instance.collection("users-favorite-items");
+    return _collectoinRef
+        .doc(user!.email)
+        .collection('items')
+        .where('itemName', isEqualTo: widget.clickItemInfo!.itemName)
+        .get()
+        .then((qS) => qS.docs.forEach((element) {
+              element.reference.delete();
+              print("deleted favorite data");
+            } ));
+            
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,6 +51,33 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         title: Text(
           widget.clickItemInfo!.itemName.toString(),
         ),
+        actions: [
+          StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("users-favorite-items")
+                  .doc(FirebaseAuth.instance.currentUser!.email)
+                  .collection('items')
+                  .where('itemName', isEqualTo: widget.clickItemInfo!.itemName)
+                  .snapshots(),
+              builder: ((context, snapshot) {
+                if (snapshot.data == null) {
+                  return Text("");
+                }
+                return IconButton(
+                  onPressed: () {
+                    snapshot.data?.docs.length == 0
+                        ? addFavorite()
+                        : deleteFavotite();
+                  },
+                  icon: snapshot.data?.docs.length == 0
+                      ? Icon(Icons.favorite)
+                      : Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        ),
+                );
+              }))
+        ],
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: Colors.black12,

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:furniture_app/item_details_screen.dart';
 import 'model/items.dart';
@@ -29,90 +31,86 @@ class _ItemUIDesignWidgetState extends State<ItemUIDesignWidget> {
           height: 120,
           width: MediaQuery.of(context).size.width,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               // Expanded(
               // child:]
               
               //
-              // Image.network(
+              Image.network(
 
-              //   widget.itemsInfo!.itemImage.toSwtring(),
-              //   width: 140,
-              //   height: 140,
+                widget.itemsInfo!.itemImage.toString(),
+                width: 140,
+                height: 140,
               
-              // ),
+              ),
             
 
               // const SizedBox(width: 4),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    //item name
-                    Expanded(
-                      child: Text(
-                        widget.itemsInfo!.itemName.toString(),
-                        maxLines: 2,
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                          // fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    // const SizedBox(height: 5),
-                    //seller name
-                    // Expanded(
-                    //   child: Text(
-                    //     widget.itemsInfo!.sellerName.toString(),
-                    //     maxLines: 2,
-                    //     style: const TextStyle(
-                    //       color: Colors.pinkAccent,
-                    //       fontSize: 16,
-                    //     ),
-                    //   ),
-                    // ),
-                    const SizedBox(height: 5),
-
-                    Column(
+                
+                child: Container(
+                  color: Color.fromARGB(255, 243, 242, 239),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // const SizedBox(
+                        //   height: 10,
+                        // ),
+                        //item name
+                        Expanded(
+                          child: Text(
+                            widget.itemsInfo!.itemName.toString(),
+                            maxLines: 2,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 17,
+                              // fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      
+                                  
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Price: ",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                                const Text(
-                                  "\$",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                                Text(
-                                  double.parse(widget.itemsInfo!.itemPrice!)
-                                      .toString(),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.red,
-                                  ),
-                                ),
+                                Row(
+                                  children: [
+                                    const Text(
+                                      "Price: ",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "\$",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    Text(
+                                      double.parse(widget.itemsInfo!.itemPrice!)
+                                          .toString(),
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
                             )
                           ],
-                        )
+                        ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ],
