@@ -5,6 +5,7 @@ import 'package:furniture_app/Item_ui_design_widget.dart';
 import 'package:furniture_app/login_screen.dart';
 import './Items_upload_screen.dart';
 import 'model/items.dart';
+import 'dart:async';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,48 +15,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  
   final user = FirebaseAuth.instance.currentUser!;
+  String name = "";
 
   @override
   Widget build(BuildContext context) {
+    _onChange(String val) {}
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          color: Colors.black,
-          icon: const Icon(Icons.menu),
-          tooltip: 'Show Snackbar',
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('This is a snackbar')));
-          },
-        ),
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Тавилга захиалга',
-          style: TextStyle(
-            fontSize: 18,
-            letterSpacing: 2,
-            color: Colors.black,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (c) => const ItemsUploadScreen()),
-              );
-            },
-            icon: const Icon(
-              Icons.add,
-              color: Colors.black,
-            ),
-          )
-        ],
-      ),
-      body: StreamBuilder(
+      body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
             .collection('items')
             .orderBy("publishedDate", descending: true)
@@ -80,31 +47,91 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                const Card(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          labelText: 'Search', suffixIcon: Icon(Icons.search)),
+                // SizedBox(
+                //   height: 50,
+                //   child: ListView.builder(
+                //     itemCount: 20,
+                //     scrollDirection: Axis.horizontal,
+                //     itemBuilder: (context, index) => Container(
+                //       child: Text("cat $index"),
+                //     ),
+                //   ),
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(
+                          width: 0,
+                          style: BorderStyle.none,
+                        ),
+                      ),
+                      filled: true,
+                      // fillColor: Colors.white,
+                      labelText: 'Search...',
+                      prefixIcon: const Icon(Icons.search),
                     ),
+                    onChanged: (val) {
+                      setState(() {
+                        name = val;
+                      });
+                    },
                   ),
                 ),
+
+                // Expanded(
+                //   child: ListView.builder(
+                //     itemCount: dataSnapshot.data!.docs.length,
+                //     itemBuilder: (context, index) {
+                //       Items eachIteminfo = Items.fromJson(
+                //           dataSnapshot.data!.docs[index].data()
+                //               as Map<String, dynamic>);
+                //       if (name.isEmpty) {
+                //         return ItemUIDesignWidget(eachIteminfo, context);
+                //       }
+                //       if (eachIteminfo.itemName
+                //           .toString()
+                //           .startsWith(name.toLowerCase())) {
+                //         return ItemUIDesignWidget(eachIteminfo, context);
+                //       }
+                //     },
+                //   ),
+                // ),
                 Expanded(
-                  child: ListView.builder(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 5,
+                        crossAxisSpacing: 5,
+                        childAspectRatio: 0.73,
+                      ),
                       itemCount: dataSnapshot.data!.docs.length,
                       itemBuilder: (context, index) {
                         Items eachIteminfo = Items.fromJson(
                             dataSnapshot.data!.docs[index].data()
                                 as Map<String, dynamic>);
-                        return ItemUIDesignWidget(eachIteminfo, context);
-                      }),
+                        if (name.isEmpty) {
+                          return ItemUIDesignWidget(eachIteminfo, context);
+                        }
+                        if (eachIteminfo.itemName
+                            .toString()
+                            .startsWith(name.toLowerCase())) {
+                          return ItemUIDesignWidget(eachIteminfo, context);
+                        }
+                      },
+                    ),
+                  ),
                 ),
               ],
             );
           } else {
-            return Column(
+            return const Column(
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children:  [
                 Center(
                   child: Text(
                     "Өгөгдөл байхгүй байна.",

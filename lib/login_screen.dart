@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:furniture_app/forgot_password.dart';
 import 'package:furniture_app/homeScreen.dart';
+import 'package:furniture_app/pages/navbar/navbar.dart';
 import 'package:furniture_app/sign_up.dart';
 import 'package:furniture_app/widgets/utils.dart';
 import './widgets/getTextFromField.dart';
@@ -203,7 +204,7 @@ class _LoginscreenState extends State<Loginscreen> {
         }
         navigatorKey.currentState?.popUntil((route) => route.isFirst);
         Navigator.push(
-            context, MaterialPageRoute(builder: (c) => HomeScreen()));
+            context, MaterialPageRoute(builder: (c) => NavigationScreen()));
       } else {
         Fluttertoast.showToast(msg: "Нууц үг 6 дээш оронтой байх ёстой!");
       }
@@ -230,7 +231,7 @@ class _LoginscreenState extends State<Loginscreen> {
                 child: Text(" Something went wrong"),
               );
             } else if (snapshot.hasData) {
-              return const HomeScreen();
+              return const NavigationScreen();
             } else {
               return loginScreen();
             }
