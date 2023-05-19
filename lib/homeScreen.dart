@@ -3,9 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/Item_ui_design_widget.dart';
 import 'package:furniture_app/login_screen.dart';
-import './Items_upload_screen.dart';
+// import './Items_upload_screen.dart';
 import 'model/items.dart';
-import 'dart:async';
+// import 'dart:async';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -122,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             .startsWith(name.toLowerCase())) {
                           return ItemUIDesignWidget(eachIteminfo, context);
                         }
+                        return null;
                       },
                     ),
                   ),

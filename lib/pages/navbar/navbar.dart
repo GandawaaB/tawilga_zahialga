@@ -1,4 +1,3 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/homeScreen.dart';
 import 'package:furniture_app/pages/navbar/basket.dart';

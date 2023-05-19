@@ -33,15 +33,14 @@ class _ItemUIDesignWidgetState extends State<ItemUIDesignWidget> {
               // Expanded(
               // child:]
               
-
               //
-              Image.network(
+              // Image.network(
 
-                widget.itemsInfo!.itemImage.toString(),
-                width: 140,
-                height: 140,
+              //   widget.itemsInfo!.itemImage.toSwtring(),
+              //   width: 140,
+              //   height: 140,
               
-              ),
+              // ),
             
 
               // const SizedBox(width: 4),
