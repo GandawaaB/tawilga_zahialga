@@ -13,6 +13,7 @@ class WishListProvider with ChangeNotifier {
   Future<void> fetchWishList() async {
     final User? user = FirebaseAuth.instance.currentUser;
     final DocumentSnapshot userDoc = await userCollection.doc(user!.uid).get();
+    // ignore: unnecessary_null_comparison
     if (userDoc == null) {
       return;
     }

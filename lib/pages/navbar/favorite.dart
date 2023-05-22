@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class FavoriteProduct extends StatefulWidget {
@@ -11,9 +12,17 @@ class _FavoriteProductState extends State<FavoriteProduct> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Text("like products... "),
-      ),
+    //   body: StreamBuilder<QuerySnapshot>(
+    //     stream: FirebaseFirestore.instance
+    //         .collection('items')
+    //         .orderBy("publishedDate", descending: true)
+    //         .snapshots(),
+    //     builder: (context, AsyncSnapshot dataSnapshot) {
+    //       if (dataSnapshot.hasData) {
+
+    //       }})
+    body: Text("Favorite"),
+
     );  
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:furniture_app/api_customer.dart';
 import 'package:furniture_app/homeScreen.dart';
+import 'package:furniture_app/pages/navbar/navbar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as fStorage;
 
@@ -260,7 +261,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
       isUploading = false;
       imageFileUnit8List = null;
     });
-    Navigator.push(context, MaterialPageRoute(builder: (c) => HomeScreen()));
+    Navigator.push(context, MaterialPageRoute(builder: (c) => NavigationScreen()));
   }
 
   Widget defaultScreen() {
