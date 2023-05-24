@@ -21,8 +21,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
     CollectionReference _collectoinRef =
         FirebaseFirestore.instance.collection("users-favorite-items");
 
-    return _collectoinRef.doc(user!.email).collection('items').doc().set({
-      'itemName': widget.clickItemInfo!.itemName,
+    return _collectoinRef.doc(user?.email).collection('items').doc().set({ 
+      'itemInfo': widget.clickItemInfo,
     }).then((value) => print("success added favorite product "));
   }
 
@@ -38,10 +38,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         .then((qS) => qS.docs.forEach((element) {
               element.reference.delete();
               print("deleted favorite data");
-            } ));
-            
+            } ));         
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
