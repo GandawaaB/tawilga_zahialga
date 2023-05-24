@@ -256,6 +256,8 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
       "publishedDate": DateTime.now(),
       "status": "available",
     });
+    
+
     Fluttertoast.showToast(msg: "Амжилттай нэмэгдлээ.");
     setState(() {
       isUploading = false;

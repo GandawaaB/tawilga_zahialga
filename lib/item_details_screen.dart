@@ -20,9 +20,18 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
     final User? user = FirebaseAuth.instance.currentUser;
     CollectionReference _collectoinRef =
         FirebaseFirestore.instance.collection("users-favorite-items");
+    // print(widget.clickItemInfo!.itemID.toString());
 
-    return _collectoinRef.doc(user?.email).collection('items').doc().set({ 
-      'itemInfo': widget.clickItemInfo,
+    return _collectoinRef.doc(user?.email).collection('items').doc().set({
+      "itemId": widget.clickItemInfo!.itemID.toString(),
+      "itemName": widget.clickItemInfo!.itemName.toString(),
+      "itemDescription": widget.clickItemInfo!.itemDescription.toString(),
+      "itemImage": widget.clickItemInfo!.itemImage.toString(),
+      "itemPrice": widget.clickItemInfo!.itemPrice.toString(),
+      "sellerName": widget.clickItemInfo!.sellerName.toString(),
+      "sellerPhone": widget.clickItemInfo!.sellerPhone.toString(),
+      "publishedDate": DateTime.now(),
+      "status": "available",
     }).then((value) => print("success added favorite product "));
   }
 
@@ -38,9 +47,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         .then((qS) => qS.docs.forEach((element) {
               element.reference.delete();
               print("deleted favorite data");
-            } ));         
+            }));
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,8 +78,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                         : deleteFavotite();
                   },
                   icon: snapshot.data?.docs.length == 0
-                      ? Icon(Icons.favorite)
-                      : Icon(
+                      ? const Icon(Icons.favorite)
+                      : const Icon(
                           Icons.favorite,
                           color: Colors.red,
                         ),
