@@ -102,10 +102,30 @@ class _BasketScreenState extends State<BasketScreen> {
               ),
               Text(
                 "\$322",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,color: Color.fromARGB(255, 245, 63, 50)),
-              )
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 245, 63, 50)),
+              ),
             ],
-          )
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 20,right: 20,bottom: 0,top: 10),
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            child: TextButton(
+              child: Text(
+                "ТӨЛӨХ",
+                style: TextStyle(color: Colors.red),
+              ),
+              onPressed: () {},
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+              border: Border.all(width: 1.0, color: Colors.grey),
+            ),
+          ),
         ],
       ),
     );

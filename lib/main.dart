@@ -8,11 +8,11 @@ import './start_screen.dart';
 Future< void> main() async {
   try{
     WidgetsFlutterBinding.ensureInitialized();
-    // print("Arcore is available?");
-    // print(await ArCoreController.checkArCoreAvailability());
+    print("Arcore is available?");
+    print(await ArCoreController.checkArCoreAvailability());
 
-    // print("\nAr server instelled?");
-    // print(await ArCoreController.checkIsArCoreInstalled());
+    print("\nAr server instelled?");
+    print(await ArCoreController.checkIsArCoreInstalled());
 
     await Firebase.initializeApp();
      
