@@ -1,35 +1,66 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/model/items.dart';
 
 import '../item_details_screen.dart';
-import '../model/itemsFavorite.dart';
+import '../model/itemsBasket.dart';
 
-class FavoriteListItemWidget extends StatelessWidget {
+class FavoriteListItemWidget extends StatefulWidget {
   Items? favoriteItem;
   BuildContext? context;
 
   FavoriteListItemWidget({this.favoriteItem, this.context});
 
   @override
+  State<FavoriteListItemWidget> createState() => _FavoriteListItemWidgetState();
+}
+
+class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
+  Future deleteFavotite() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    CollectionReference _collectoinRef =
+        FirebaseFirestore.instance.collection("users-favorite-items");
+    return _collectoinRef
+        .doc(user!.email)
+        .collection('items')
+        .where('itemName', isEqualTo: widget.favoriteItem?.itemName)
+        .get()
+        .then(
+          (qS) => qS.docs.forEach(
+            (element) {
+              element.reference.delete();
+              print("deleted favorite data");
+            },
+          ),
+        );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(horizontal:10, ),
       child: Container(
         height: 100,
         width: MediaQuery.of(context).size.width,
         child: Card(
           child: InkWell(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute( builder: (context) => ItemDetailsScreen(favoriteItem)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ItemDetailsScreen(widget.favoriteItem)));
             },
             child: Row(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image(
-                    image: NetworkImage(favoriteItem!.itemImage.toString()),
+                    image:
+                        NetworkImage(widget.favoriteItem!.itemImage.toString()),
                     fit: BoxFit.cover,
-                    width: 150,
+                    width: 100,
                     height: 100,
                   ),
                 ),
@@ -42,20 +73,25 @@ class FavoriteListItemWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        favoriteItem!.itemName.toString(),
+                        widget.favoriteItem!.itemName.toString(),
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        favoriteItem!.itemDescription.toString(),
+                        widget.favoriteItem!.itemDescription.toString(),
                         // style: TextStyle(),
                       ),
                     ],
                   ),
                 ),
-                // IconButton(
-                //   onPressed: () {},
-                //   icon: const Icon(Icons.delete),
-                // ),
+                IconButton(
+                  onPressed: () {
+                    deleteFavotite();
+                  },
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Color.fromARGB(255, 138, 65, 60),
+                  ),
+                ),
               ],
             ),
           ),

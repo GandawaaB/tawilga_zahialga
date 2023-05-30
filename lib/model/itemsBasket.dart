@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ItemsFavorite {
+class ItemsBasket {
   String? itemID;
   String? itemName;
   String? itemDescription;
@@ -8,7 +8,8 @@ class ItemsFavorite {
   String? itemPrice;
   Timestamp? publishedDate;
   String? status;
-  ItemsFavorite({
+  String? total;
+  ItemsBasket({
     this.itemID,
     this.itemName,
     this.itemDescription,
@@ -16,9 +17,10 @@ class ItemsFavorite {
     this.itemPrice,
     this.publishedDate,
     this.status,
+    this.total,
   });
 
-  ItemsFavorite.fromJson(Map<String, dynamic>json){
+  ItemsBasket.fromJson(Map<String, dynamic>json){
     itemID = json["itemId"];
     itemName = json["itemName"];
     itemDescription = json["itemDescription"];
@@ -26,5 +28,6 @@ class ItemsFavorite {
     itemPrice = json["itemPrice"];
     publishedDate = json["publishedDate"];
     status = json["status"];
+    total = json["total"];
   }
 }

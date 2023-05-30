@@ -1,12 +1,7 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/model/items.dart';
-import 'package:furniture_app/model/itemsFavorite.dart';
-
-import '../../item_details_screen.dart';
 import '../../widgets/favoriteListWidget.dart';
 
 class FavoriteProduct extends StatefulWidget {
@@ -33,24 +28,21 @@ class _FavoriteProductState extends State<FavoriteProduct> {
         builder: (context, AsyncSnapshot dataSnapshot) {
           if (dataSnapshot.hasData) {
             // return
-            return Container(
-              child: ListView.builder(
-                itemCount: dataSnapshot.data!.docs.length,
-                itemBuilder: (context, i) {
-                  Items eachIteminfo = Items.fromJson(dataSnapshot.data!.docs[i]
-                      .data() as Map<String, dynamic>);
-                  // print(eachIteminfo.itemImage.toString());
-                  return FavoriteListItemWidget(
-                    favoriteItem: eachIteminfo,
-                    context: context,
-                  );
-                },
-              ),
+            return ListView.builder(
+              itemCount: dataSnapshot.data!.docs.length,
+              itemBuilder: (context, i) {
+                Items eachIteminfo = Items.fromJson(
+                    dataSnapshot.data!.docs[i].data() as Map<String, dynamic>);
+
+                return FavoriteListItemWidget(
+                  favoriteItem: eachIteminfo,
+                  context: context,
+                );
+              },
             );
           } else {
-            Text("");
+            return Text("");
           }
-          return Text("");
         },
       ),
     );

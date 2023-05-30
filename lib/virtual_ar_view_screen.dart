@@ -25,7 +25,6 @@ class _VirtualARViewScreenState extends State<VirtualARViewScreen> {
   void whenArCoreViwCreated(ArCoreController controller) async {
     // File imageFile = File('assets/profile_login.png');
 
-    
     // List<int> imageBytes = await imageFile.readAsBytes();
     // print(imageBytes);
 
@@ -33,17 +32,19 @@ class _VirtualARViewScreenState extends State<VirtualARViewScreen> {
 
     arCoreController = controller;
     arCoreController.onNodeTap = (name) => handleNodeTap(name);
-    final byts = (await rootBundle.load("assets/profile_login.png"))
-        .buffer
-        .asUint8List();
-        print("bytes:$byts");
-    arCoreController.loadSingleAugmentedImage(bytes: byts);
+    arCoreController.onPlaneTap = controlOnPlaneTap; 
+    // final byts = (await rootBundle.load("assets/profile_login.png"))
+    //     .buffer
+    //     .asUint8List();
+    //     print("bytes:$byts");
+    // arCoreController.loadSingleAugmentedImage(bytes: byts);
 
     // arCoreController = controller;
     // arCoreController.onPlaneTap = controlOnPlaneTap;
   }
 
   void handleNodeTap(String name) {
+    
     if (name == 'firstArIMG') {
       // Display the image
       // Add your logic to show the image using Flutter widgets
@@ -52,6 +53,7 @@ class _VirtualARViewScreenState extends State<VirtualARViewScreen> {
 
   void controlOnPlaneTap(List<ArCoreHitTestResult> result) {
     final hit = result.first;
+    print("hit + $hit");
     addItemImageScene(hit);
   }
 
@@ -63,7 +65,7 @@ class _VirtualARViewScreenState extends State<VirtualARViewScreen> {
             .asUint8List();
     print("Bytes:$bytes");
 
-    try {
+    
       final imageItem = ArCoreNode(
         image: ArCoreImage(bytes: bytes, width: 600, height: 600),
         position:
@@ -73,9 +75,7 @@ class _VirtualARViewScreenState extends State<VirtualARViewScreen> {
       );
       arCoreController.addArCoreNodeWithAnchor(imageItem);
       // ArCoreApk_checkAv
-    } catch (err) {
-      print("err:$err");
-    }
+  
   }
 
   @override
