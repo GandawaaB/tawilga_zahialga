@@ -1,11 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:furniture_app/homeScreen.dart';
+import 'package:furniture_app/pages/admin/getUsers.dart';
+import 'package:furniture_app/pages/admin/productWidget.dart';
 import 'package:furniture_app/pages/navbar/basket.dart';
 import 'package:furniture_app/pages/navbar/favorite.dart';
 import 'package:furniture_app/pages/navbar/notification.dart';
 import 'package:furniture_app/pages/navbar/user.dart';
 
 import '../../Items_upload_screen.dart';
+import '../admin/orderList.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({super.key});
@@ -14,10 +18,17 @@ class NavigationScreen extends StatefulWidget {
   State<NavigationScreen> createState() => _NavigationScreenState();
 }
 
-const List<Widget> pages = [
+const List<Widget> user_pages = [
   HomeScreen(),
   FavoriteProduct(),
   BasketScreen(),
+  NotificationScreeen(),
+  UserScreen()
+];
+const List<Widget> admin_pages= [
+  ProductWidget(),
+  GetUsers(),
+  OrderList(),
   NotificationScreeen(),
   UserScreen()
 ];
@@ -32,7 +43,7 @@ class _NavigationScreenState extends State<NavigationScreen>
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController = TabController(length: pages.length, vsync: this);
+    _tabController = TabController(length: user_pages.length, vsync: this);
     int t = _tabController.index;
     setState(() {
       curIndex = t;
@@ -56,20 +67,23 @@ class _NavigationScreenState extends State<NavigationScreen>
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    //admin screens
+    if (user?.email == "admin@gmail.com") {
+      return DefaultTabController(
       length: 5,
       initialIndex: 0,
       child: Builder(
         builder: (context) {
           index = DefaultTabController.of(context).index;
-
           return Scaffold(
             appBar: AppBar(
               leading: IconButton(
-                color: Colors.black,
+                color: Colors.white,
                 icon: const Icon(
                   Icons.chair_alt_sharp,
-                  color: Color.fromARGB(255, 53, 59, 78),
+                  color: Colors.white,
                 ),
                 tooltip: 'Show Snackbar',
                 onPressed: () {
@@ -77,37 +91,39 @@ class _NavigationScreenState extends State<NavigationScreen>
                   //     const SnackBar(content: Text('This is a snackbar')));
                 },
               ),
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).primaryColor,
               title: const Text(
-                'Тавилга захиалга',
+                'Тавилга захиалга:Admin',
                 style: TextStyle(
                   fontSize: 18,
                   letterSpacing: 2,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               actions: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (c) => const ItemsUploadScreen()),
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.add,
-                    color: Colors.black,
-                  ),
-                )
+                if (user?.email == "admin@gmail.com")
+                  IconButton(
+                    onPressed: () {
+                      print(user?.email.toString());
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => const ItemsUploadScreen()),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.white54,
+                    ),
+                  )
               ],
             ),
             body: TabBarView(
               // controller: _tabController,
               controller: _tabController,
               physics: const BouncingScrollPhysics(),
-              children: pages,
+              children: admin_pages,
             ),
 
             // pages[curIndex],
@@ -117,11 +133,97 @@ class _NavigationScreenState extends State<NavigationScreen>
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: Container(
-                  color: Colors.white,
+                  color: Theme.of(context).primaryColor,
                   child: TabBar(
                     controller: _tabController,
                     labelColor: HexColor.fromHex("#0C1A4B"),
-                    unselectedLabelColor: Colors.grey,
+                    unselectedLabelColor: Colors.white54,
+                    labelStyle: const TextStyle(fontSize: 10),
+                    indicatorColor: HexColor.fromHex("#0C1A4B"),
+                    tabs: const <Widget>[
+                      Tab(icon: Icon(Icons.list_alt)),
+                      Tab(icon: Icon(Icons.verified_user)),
+                      Tab(icon: Icon(Icons.inbox)),
+                      Tab(icon: Icon(Icons.notifications)),
+                      Tab(icon: Icon(Icons.manage_accounts)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+    }
+    //user screns
+    return DefaultTabController(
+      length: 5,
+      initialIndex: 0,
+      child: Builder(
+        builder: (context) {
+          index = DefaultTabController.of(context).index;
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                color: Colors.white,
+                icon: const Icon(
+                  Icons.chair_alt_sharp,
+                  color: Colors.white,
+                ),
+                tooltip: 'Show Snackbar',
+                onPressed: () {
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(content: Text('This is a snackbar')));
+                },
+              ),
+              backgroundColor: Theme.of(context).primaryColor,
+              title: const Text(
+                'Тавилга захиалга',
+                style: TextStyle(
+                  fontSize: 18,
+                  letterSpacing: 2,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              actions: [
+                if (user?.email == "admin@gmail.com")
+                  IconButton(
+                    onPressed: () {
+                      print(user?.email.toString());
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => const ItemsUploadScreen()),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.white54,
+                    ),
+                  )
+              ],
+            ),
+            body: TabBarView(
+              // controller: _tabController,
+              controller: _tabController,
+              physics: const BouncingScrollPhysics(),
+              children: user_pages,
+            ),
+
+            // pages[curIndex],
+            bottomNavigationBar: Container(
+              padding: const EdgeInsets.all(10),
+              height: 70,
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                child: Container(
+                  color: Theme.of(context).primaryColor,
+                  child: TabBar(
+                    controller: _tabController,
+                    labelColor: HexColor.fromHex("#0C1A4B"),
+                    unselectedLabelColor: Colors.white54,
                     labelStyle: const TextStyle(fontSize: 10),
                     indicatorColor: HexColor.fromHex("#0C1A4B"),
                     tabs: const <Widget>[

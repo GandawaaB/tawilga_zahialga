@@ -30,9 +30,10 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
   // ignore: non_constant_identifier_names
   Widget UploadFromScreen() {
     return Scaffold(
-      backgroundColor: Colors.black,
+      // backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).primaryColor,
+        // backgroundColor: Colors.black,
         title: const Text(
           'Upload New Item',
           style: TextStyle(
@@ -76,12 +77,12 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
                 : const Center(
                     child: Icon(
                       Icons.image_not_supported,
-                      color: Colors.grey,
+                      color: Colors.black,
                     ),
                   ),
           ),
           const Divider(
-            color: Colors.white70,
+            color: Colors.black12,
             thickness: 2,
           ),
 
@@ -89,7 +90,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
           ListTile(
             leading: const Icon(
               Icons.person_pin_rounded,
-              color: Colors.white,
+              color: Colors.black54,
             ),
             title: SizedBox(
               width: 250,
@@ -105,14 +106,14 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             ),
           ),
           const Divider(
-            color: Colors.white70,
+            color: Colors.black12,
             thickness: 1,
           ),
           //seller phone
           ListTile(
             leading: const Icon(
               Icons.phone_iphone_rounded,
-              color: Colors.white,
+              color: Colors.black54,
             ),
             title: SizedBox(
               width: 250,
@@ -128,14 +129,14 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             ),
           ),
           const Divider(
-            color: Colors.white70,
+            color: Colors.black12,
             thickness: 1,
           ),
           //item name
           ListTile(
             leading: const Icon(
               Icons.title,
-              color: Colors.white,
+              color: Colors.black54,
             ),
             title: SizedBox(
               width: 250,
@@ -151,14 +152,14 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             ),
           ),
           const Divider(
-            color: Colors.white70,
+            color: Colors.black12,
             thickness: 1,
           ),
           //item description
           ListTile(
             leading: const Icon(
               Icons.description,
-              color: Colors.white,
+              color: Colors.black54,
             ),
             title: SizedBox(
               width: 250,
@@ -174,14 +175,14 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             ),
           ),
           const Divider(
-            color: Colors.white70,
+            color: Colors.black12,
             thickness: 1,
           ),
           //item price
           ListTile(
             leading: const Icon(
               Icons.price_change,
-              color: Colors.white,
+              color: Colors.black54,
             ),
             title: SizedBox(
               width: 250,
@@ -197,7 +198,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
             ),
           ),
           const Divider(
-            color: Colors.white70,
+            color: Colors.black12,
             thickness: 1,
           ),
         ],
@@ -268,9 +269,9 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
 
   Widget defaultScreen() {
     return Scaffold(
-      backgroundColor: Colors.white,
+      // backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        backgroundColor: Colors.black12,
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text(
           "Upload New Item",
           style: TextStyle(
@@ -288,9 +289,10 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
               color: Colors.black26,
               size: 200,
             ),
+            
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
+                  backgroundColor: Theme.of(context).primaryColor,
                 ),
                 onPressed: () {
                   showDailogBox();
@@ -298,7 +300,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen> {
                 child: const Text(
                   "Add New Item",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ))
           ],

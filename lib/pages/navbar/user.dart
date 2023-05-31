@@ -14,23 +14,25 @@ class UserScreen extends StatefulWidget {
 
 String userName = 'Zorig';
 String userPhone = '89898989';
-final user = FirebaseAuth.instance.currentUser!;
 
 class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
     return SingleChildScrollView(
       child: Card(
         child: Container(
           padding: const EdgeInsets.only(top: 20),
-          height: 600,
+          height: 700,
           width: double.infinity,
           child: Column(
             children: [
               getSettingsForm(
                 icon1: Icons.person,
                 icon2: Icons.chevron_right,
-                name: user.email!.toString(),
+                name: user!.email.toString(),
+                
+                // name: "hi",
                 phone: userPhone,
               ),
               const Divider(

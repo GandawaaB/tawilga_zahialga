@@ -30,10 +30,19 @@ class _BasketScreenState extends State<BasketScreen> {
         builder: (context, AsyncSnapshot dataSnapshot) {
           if (dataSnapshot.hasData) {
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                
+                 Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "Сагсан дахь бараанууд:",
+                    style: TextStyle(fontSize: 20, color: Colors.black38),
+                  ),
+                ),
                 // Center(child: Text("Сагс")),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.black, width: 0.3),
@@ -43,22 +52,28 @@ class _BasketScreenState extends State<BasketScreen> {
                         )),
                     // color: Color.fromARGB(255, 223, 223, 223),
                     height: 400,
-                    child: Expanded(
-                      child: ListView.builder(
-                        itemCount: dataSnapshot.data!.docs.length,
-                        itemBuilder: (context, i) {
-                          ItemsBasket eachIteminfo = ItemsBasket.fromJson(
-                              dataSnapshot.data!.docs[i].data()
-                                  as Map<String, dynamic>);
-
-                          // print(eachIteminfo.itemImage.toString());
-                          // return Text("Name:${eachIteminfo.total}");
-                          return BasketWidget(
-                            context: context,
-                            basketItem: eachIteminfo,
-                          );
-                        },
-                      ),
+                    child: Column(
+                      children: [
+                        SizedBox(height: 12,),
+                        Container(
+                          height: 376,
+                          child: ListView.builder(
+                            itemCount: dataSnapshot.data!.docs.length,
+                            itemBuilder: (context, i) {
+                              ItemsBasket eachIteminfo = ItemsBasket.fromJson(
+                                  dataSnapshot.data!.docs[i].data()
+                                      as Map<String, dynamic>);
+                        
+                              // print(eachIteminfo.itemImage.toString());
+                              // return Text("Name:${eachIteminfo.total}");
+                              return BasketWidget(
+                                context: context,
+                                basketItem: eachIteminfo,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

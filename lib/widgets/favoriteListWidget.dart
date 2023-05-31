@@ -59,7 +59,6 @@ class _FavoriteListItemWidgetState extends State<FavoriteListItemWidget> {
                   child: Image(
                     image:
                         NetworkImage(widget.favoriteItem!.itemImage.toString()),
-                    fit: BoxFit.cover,
                     width: 100,
                     height: 100,
                   ),

@@ -1,7 +1,3 @@
-// ignore_for_file: must_be_immutable
-
-import "dart:ffi";
-
 import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_auth/firebase_auth.dart";
 import "package:flutter/material.dart";
@@ -177,7 +173,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                     color: Colors.black54,
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
-                  )),
+                  ),),
             ),
             const Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 310),

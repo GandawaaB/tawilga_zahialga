@@ -28,7 +28,7 @@ class _BasketWidgetState extends State<BasketWidget> {
               children: [
                 Image(
                   image: NetworkImage(widget.basketItem!.itemImage.toString()),
-                  fit: BoxFit.cover,
+                  
                   width: 125,
                   height: 100,
                 ),
