@@ -16,7 +16,35 @@ class BasketScreen extends StatefulWidget {
 }
 
 class _BasketScreenState extends State<BasketScreen> {
+  
+   @override
+  void initState() {
+    super.initState();
+    // Call your function here
+    getTotalNumberFromFirebase();
+  }
   final User? user = FirebaseAuth.instance.currentUser;
+  double totalPrice = 0.0;
+
+  Future<void> getTotalNumberFromFirebase()async{ 
+      final   QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users-basket-items').doc(user!.email).collection("items").get();
+
+   double total = 0.0;
+
+    snapshot.docs.forEach((doc) {
+      // double price = doc.get('itemPrice') as double;
+      double price = double.parse(doc.get("itemPrice").toString());
+      total += price;
+      
+    });
+    setState(() {
+      
+      totalPrice = total;
+    });
+    print(total);
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +94,12 @@ class _BasketScreenState extends State<BasketScreen> {
                         
                               // print(eachIteminfo.itemImage.toString());
                               // return Text("Name:${eachIteminfo.total}");
+                              // int  t = int.parse( eachIteminfo.itemPrice.toString());
+                              // print("n:$t");
                               return BasketWidget(
                                 context: context,
                                 basketItem: eachIteminfo,
+                                
                               );
                             },
                           ),
@@ -79,18 +110,18 @@ class _BasketScreenState extends State<BasketScreen> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    SizedBox(
+                  children:  [
+                    const SizedBox(
                       width: 15,
                     ),
-                    Text(
+                    const Text(
                       "Нийт: ",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     Text(
-                      "\$322",
-                      style: TextStyle(
+                      '\$${totalPrice.toStringAsFixed(2)}',
+                      style:const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           color: Color.fromARGB(255, 245, 63, 50)),

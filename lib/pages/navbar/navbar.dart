@@ -8,7 +8,7 @@ import 'package:furniture_app/pages/navbar/favorite.dart';
 import 'package:furniture_app/pages/navbar/notification.dart';
 import 'package:furniture_app/pages/navbar/user.dart';
 
-import '../../Items_upload_screen.dart';
+import '../admin/Items_upload_screen.dart';
 import '../admin/orderList.dart';
 
 class NavigationScreen extends StatefulWidget {
@@ -142,8 +142,8 @@ class _NavigationScreenState extends State<NavigationScreen>
                     indicatorColor: HexColor.fromHex("#0C1A4B"),
                     tabs: const <Widget>[
                       Tab(icon: Icon(Icons.list_alt)),
-                      Tab(icon: Icon(Icons.verified_user)),
-                      Tab(icon: Icon(Icons.inbox)),
+                      Tab(icon: Icon(Icons.supervised_user_circle)),
+                      Tab(icon: Icon(Icons.content_paste_rounded)),
                       Tab(icon: Icon(Icons.notifications)),
                       Tab(icon: Icon(Icons.manage_accounts)),
                     ],

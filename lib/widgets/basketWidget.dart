@@ -14,6 +14,8 @@ class BasketWidget extends StatefulWidget {
 }
 
 class _BasketWidgetState extends State<BasketWidget> {
+  double totalPrice = 0.0;
+  final User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -103,7 +105,29 @@ class _BasketWidgetState extends State<BasketWidget> {
       ),
     );
   }
+ Future<void> getTotalNumberFromFirebase()async{ 
+      final   QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('users-basket-items').doc(user!.email).collection("items").get();
 
+   double total = 0.0;
+  //  double t   = 0.0;
+
+    snapshot.docs.forEach((doc) {
+      // double price = doc.get('itemPrice') as double;
+      double t = double.parse(doc.get("total").toString());
+      double price = double.parse(doc.get("itemPrice").toString());
+      double m  = t * price;
+      print(m);
+      total += m;
+    });
+    // print("ssd"+t.toString());
+    setState(() {
+      
+      totalPrice = total;
+    });
+    print(totalPrice);
+
+  }
   Future deleteBasket() async {
     final User? user = FirebaseAuth.instance.currentUser;
     CollectionReference _collectoinRef =
@@ -120,6 +144,6 @@ class _BasketWidgetState extends State<BasketWidget> {
               print("deleted basket data");
             },
           ),
-        );
+    );
   }
 }

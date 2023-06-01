@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:augmented_reality_plugin/augmented_reality_plugin.dart';
 import 'package:flutter/material.dart';
 // import 'package:augmented_reality_plugin/augmented_reality_plugin.dart';
 import 'package:flutter/services.dart';
@@ -80,13 +81,13 @@ class _VirtualARViewScreenState extends State<VirtualARViewScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // return AugmentedRealityPlugin(widget.clickedItemImageLink.toString());
-    return Scaffold(
-      body: ArCoreView(
-        onArCoreViewCreated: whenArCoreViwCreated,
-        enableTapRecognizer: true,
-        enableUpdateListener: true,
-      ),
-    );
+    return AugmentedRealityPlugin(widget.clickedItemImageLink.toString());
+    // return Scaffold(
+    //   body: ArCoreView(
+    //     onArCoreViewCreated: whenArCoreViwCreated,
+    //     enableTapRecognizer: true,
+    //     enableUpdateListener: true,
+    //   ),
+    // );
   }
 }
